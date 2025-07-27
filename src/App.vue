@@ -1,4 +1,26 @@
 <script setup lang="ts">
+import AccView from './views/AccView.vue';
+</script>
+
+<template>
+  <div>
+    <AccView/>
+  </div>
+</template>
+
+<style>
+
+body {
+  font-family: sans-serif;
+  background-color: white;
+  color: rgb(46, 47, 70);
+  margin: 0;
+  padding: 0;
+}
+</style>
+
+
+<!-- <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
@@ -27,4 +49,4 @@ import HelloWorld from './components/HelloWorld.vue'
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
-</style>
+</style> -->
