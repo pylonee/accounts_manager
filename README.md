@@ -1,5 +1,25 @@
-# Vue 3 + TypeScript + Vite
+Управление учетными записями.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Стек:
+- Vue3
+- TypeScript
+- Pinia
+- PrimeVue 3
+- Vite
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+Установка:
+1. Клонируй репозиторий
+    git clone https://github.com/pylonee/accounts_manager.git
+2. Установи зависимости
+    npm install
+3. запусти проект (режим разработки)
+    npm run dev
+
+Функционал:
+- Добавление/удаление учетных записей с полями:
+- метка (необязательное)
+- тип записи (выбор из 2х вариантов, с паролем и без)
+- логин (обязательное)
+- пароль (обязательное при типе записи "Локальная")
+
+Для отображения данных в браузере должен быть включен localStorage
