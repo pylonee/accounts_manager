@@ -20,9 +20,7 @@ const initErrors = (acc: Acc) => {
 const validateAcc = (acc: Acc) => {
     const accErrors: Record<string, string> = {}
 
-
     const checkLabelLen = acc.labels.reduce((sum, label) => sum + label.text.length, 0)
-    console.log(checkLabelLen)
     if (checkLabelLen > 50) {
         accErrors.labels = 'Максимум 50 символов'
     } else {
@@ -67,6 +65,7 @@ const updateType = (id: string, type: 'LDAP' | 'Локальная') => {
 
 const updateLogin = (id: string, login: string) => {
     store.updateAcc(id, { login })
+    
 }
 
 const updatePassword = (id: string, password: string) => {
@@ -87,6 +86,7 @@ const removeAcc = (id: string) => {
 
 
 store.accounts.forEach(initErrors)
+store.accounts.forEach(validateAcc)
 </script>
 
 
