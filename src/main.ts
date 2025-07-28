@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import './style.css'
 import App from './App.vue'
 import PrimeVue from 'primevue/config'
 
@@ -14,7 +13,6 @@ import InputText from 'primevue/inputtext'
 import DropDown from 'primevue/dropdown'
 import Password from 'primevue/password'
 
-
 const app = createApp(App)
 
 app.use(createPinia())
@@ -22,7 +20,7 @@ app.use(PrimeVue)
 
 app.component('Button', Button)
 app.component('InputText', InputText)
-app.component('DropDown', DropDown)
+app.component('Dropdown', DropDown)
 app.component('Password', Password)
 
 app.mount('#app')

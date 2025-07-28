@@ -6,7 +6,8 @@ import AccForm from '../components/AccForm.vue';
 const store = useAccStore()
 const errors = ref<Record<string, Record<string, string>>>({})
 
-const initErrors = (acc:Acc) => {
+
+const initErrors = (acc: Acc) => {
     errors.value[acc.id] = reactive({
         labels: '',
         type: '',
@@ -21,15 +22,20 @@ const validateAcc = (acc: Acc) => {
 
 
     const checkLabelLen = acc.labels.reduce((sum, label) => sum + label.text.length, 0)
+    console.log(checkLabelLen)
     if (checkLabelLen > 50) {
         accErrors.labels = 'Максимум 50 символов'
+    } else {
+        accErrors.labels = ''
     }
 
-
+    
     if (!acc.login.trim()) {
         accErrors.login = 'Обязательное поле'
     } else if (acc.login.length > 100) {
         accErrors.login = 'Максимум 100 символов'
+    } else {
+        accErrors.login = ''
     }
 
 
@@ -38,6 +44,8 @@ const validateAcc = (acc: Acc) => {
             accErrors.password = 'Обязательно поле'
         } else if (acc.password.length > 100) {
             accErrors.password = 'Максимум 100 символов'
+        } else {
+            accErrors.password = ''
         }
     }
 
@@ -83,42 +91,35 @@ store.accounts.forEach(initErrors)
 
 
 <template>
-    <div class="accs-view">
+    <div class="accs-view p-4">
         <div class="title">
             <h1 class="title">Учетные записи</h1>
-            <Button
-              label="Добавить"
-              icon="pi pi-plus"
-              class="p-button-success"
-              @click="addAcc"
-            />
+            <Button label="Добавить" icon="pi pi-plus" class="p-button-success" @click="addAcc" />
         </div>
 
-        <div class="card">
+        <div class="p-card">
             <div class="table">
                 <table class="accs-table">
                     <thead>
                         <tr>
                             <th>Метки</th>
-                            <th>Метки</th>
-                            <th>Метки</th>
-                            <th>Метки</th>
+                            <th>Тип записи</th>
+                            <th>Логин</th>
+                            <th>Пароль</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <AccForm
-                          v-for="acc in store.accounts"
-                          :key="acc.id"
-                          :acc="acc"
+                        <AccForm 
+                          v-for="acc in store.accounts" 
+                          :key="acc.id" :acc="acc" 
                           :errors="errors[acc.id]"
-                          @update:labels="updateLabels(acc.id, $event)"
+                          @update:labels="updateLabels(acc.id, $event)" 
                           @update:type="updateType(acc.id, $event)"
                           @update:login="updateLogin(acc.id, $event)"
-                          @update:password="updatePassword(acc.id, $event)"
+                          @update:password="updatePassword(acc.id, $event)" 
                           @validate="validateAcc(acc)"
-                          @remove="removeAcc(acc.id)"
-                        />
+                          @remove="removeAcc(acc.id)" />
                     </tbody>
                 </table>
             </div>
@@ -130,13 +131,12 @@ store.accounts.forEach(initErrors)
 .accs-table {
     width: 100%;
     border-collapse: collapse;
-
-    border: 1px solid blue;
 }
 
 .accs-table th {
     text-align: left;
-    padding: 10px;
+    
+    padding: 16px;
     background-color: white;
     border-bottom: 2px solid rgb(208, 212, 218);
 }
@@ -144,5 +144,4 @@ store.accounts.forEach(initErrors)
 .table {
     overflow-x: auto;
 }
-
 </style>

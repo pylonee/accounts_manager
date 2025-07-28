@@ -18,7 +18,7 @@ export const useAccStore = defineStore('accounts', () => {
 
     // localStorage загрузка аккаунтов
     const loadAccs = () => {
-        const existing = localStorage.getItem('accounsts')
+        const existing = localStorage.getItem('accounts')
         if (existing) {
             try {
                 accounts.value = JSON.parse(existing)

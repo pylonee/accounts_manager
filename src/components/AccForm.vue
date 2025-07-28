@@ -18,7 +18,7 @@ const emit = defineEmits([
 
 const typeOptions = [
     { label: 'LDAP', value: 'LDAP' },
-    { label: 'Локальная', value: 'Локальная' },
+    { label: 'Локальная', value: 'Локальная' }
 ]
 
 const lableStr = computed({
@@ -34,7 +34,7 @@ const lableStr = computed({
     }
 })
 
-const updateType = (value: 'Локальная' | 'LDAP') => {
+const updateType = (value: 'LDAP' | 'Локальная') => {
     emit('update:type', value)
     if (value === 'LDAP') {
         emit('update:password', null)
@@ -48,68 +48,68 @@ const updateType = (value: 'Локальная' | 'LDAP') => {
     <tr class="acc-row">
         <!-- поле метка -->
         <td>
-            <div class="field">
+            <div class="p-field">
                 <InputText
                   v-model="lableStr"
                   placeholder="Метки вводятся через ;"
-                  :class="{ 'invalid': errors.labels}"
+                  :class="{ 'p-invalid': errors.labels}"
                   @blur="$emit('validate')"
                 />
-                <small v-if="errors.labels" class="error">{{ errors.labels }}</small>
+                <small v-if="errors.labels" class="p-error">{{ errors.labels }}</small>
             </div>
         </td>
 
         <!-- поле тип записи -->
         <td>
-            <div class="field">
+            <div class="p-field">
                 <Dropdown
                   v-model="acc.type"
                   :options="typeOptions"
                   optionLabel="label"
-                  optionValue="vlaue"
+                  optionValue="value"
                   @change="updateType($event.value)"
-                  :class="{ 'invalid' : errors.type}"
+                  :class="{ 'p-invalid' : errors.type}"
                 />
-                <small v-if="errors.type" class="error">{{ errors.type }}</small>
+                <small v-if="errors.type" class="p-error">{{ errors.type }}</small>
             </div>
         </td>
 
         <!-- поле логин -->
         <td>
-            <div class="field">
+            <div class="p-field">
                 <InputText
                   :modelValue="acc.login"
                   @update:modelValue="$emit('update:login', $event)"
                   @blur="$emit('validate')"
-                  :class="{ 'invalid' : errors.login}"
+                  :class="{ 'p-invalid' : errors.login}"
                 />
-                <small v-if="errors.login" class="error">{{ errors.login }}</small>
+                <small v-if="errors.login" class="p-error">{{ errors.login }}</small>
             </div>
         </td>
 
         <!-- поле пароль -->
         <td>
-            <div class="field" v-if="acc.type === 'Локальная'">
+            <div class="p-field" v-if="acc.type === 'Локальная'">
                 <Password
                   :modelValue="acc.password || ''"
                   @update:modelValue="$emit('update:password', $event)"
                   @blur="$emit('validate')"
-                  :feedback="false"
-                  toogleVisible
-                  :class="{ 'invalid': errors.password}"
+                  :feedback="true"
+                  toggleMask
+                  :class="{ 'p-invalid': errors.password}"
                 />
-                <small v-if="errors.password" class="error">{{ errors.password }}</small>
+                <small v-if="errors.password" class="p-error">{{ errors.password }}</small>
             </div>
             <div v-else class="passInvis">
-                <span>Пароль не нужен</span>
+                <span class="p-text-secondary">Пароль не нужен</span>
             </div>
         </td>
 
         <!-- кнопка удаления -->
         <td class="delete-button">
             <Button
-              icon="pi-trash"
-              class="button-danger"
+              icon="pi pi-trash"
+              class="p-button-danger"
               @click="$emit('remove')"
             />
         </td>
@@ -118,21 +118,22 @@ const updateType = (value: 'Локальная' | 'LDAP') => {
 
 <style scoped>
 .acc-row {
-    border-bottom: 1px solid rgb(208, 212, 218);
-    transition: background-color 0.2s;
+    border-bottom: 1px solid rgb(222, 226, 230);
+    transition: background-color 0.4s;
 }
 
 .acc-row:hover {
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(239, 240, 241);
 }
 
 .acc-row td {
-    padding: 20px;
-    vertical-align: middle;
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
 }
 
-.field {
-    min-width: 150px;
+.p-field {
+    min-width: 100px;
 }
 
 .passInvis{
@@ -144,9 +145,9 @@ const updateType = (value: 'Локальная' | 'LDAP') => {
     text-align: center;
 }
 
-.error {
+.p-error {
     display: block;
     margin-top: 4px;
-    font-size: 14px;
+    font-size: 12px;
 }
 </style>
